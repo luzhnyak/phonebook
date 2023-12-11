@@ -1,76 +1,77 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "./store";
 
 export const api = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://connections-api.herokuapp.com',
+    baseUrl: "https://connections-api.herokuapp.com",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
-      const token = getState().auth.token;
+      const token = (getState() as RootState).auth.token;
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
   }),
 
-  tagTypes: ['User', 'Contacts'],
-  endpoints: builder => ({
+  tagTypes: ["User", "Contacts"],
+  endpoints: (builder) => ({
     getCurrentUser: builder.query({
       query: () => `users/current`,
-      providesTags: ['User'],
+      providesTags: ["User"],
     }),
     addUser: builder.mutation({
-      query: body => {
+      query: (body) => {
         return {
-          url: 'users/signup',
-          method: 'POST',
+          url: "users/signup",
+          method: "POST",
           body,
         };
       },
       // invalidatesTags: ['User'],
     }),
     login: builder.mutation({
-      query: body => {
+      query: (body) => {
         return {
-          url: 'users/login',
-          method: 'POST',
+          url: "users/login",
+          method: "POST",
           body,
         };
       },
-      invalidatesTags: ['User', 'Contacts'],
+      invalidatesTags: ["User", "Contacts"],
     }),
     logout: builder.mutation({
       query: () => {
         return {
-          url: 'users/logout',
-          method: 'POST',
+          url: "users/logout",
+          method: "POST",
         };
       },
-      invalidatesTags: ['User', 'Contacts'],
+      invalidatesTags: ["User", "Contacts"],
     }),
     getContacts: builder.query({
       query: () => `contacts`,
-      providesTags: ['Contacts', 'Users'],
+      providesTags: ["Contacts"],
     }),
     addContact: builder.mutation({
-      query: body => {
+      query: (body) => {
         return {
-          url: 'contacts',
-          method: 'POST',
+          url: "contacts",
+          method: "POST",
           body,
         };
       },
-      invalidatesTags: ['Contacts'],
+      invalidatesTags: ["Contacts"],
     }),
     deleteContact: builder.mutation({
-      query: id => {
+      query: (id) => {
         return {
           url: `contacts/${id}`,
-          method: 'DELETE',
+          method: "DELETE",
         };
       },
-      invalidatesTags: ['Contacts'],
+      invalidatesTags: ["Contacts"],
     }),
   }),
 });

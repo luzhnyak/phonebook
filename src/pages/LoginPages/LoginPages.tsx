@@ -1,22 +1,22 @@
-import { LoadingButton } from '@mui/lab';
-import { Box, Link, TextField, Typography } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import { Formik } from 'formik';
-import React from 'react';
-import { useLoginMutation } from 'redux/api';
-import { setCredentials } from 'redux/authSlice';
-import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { LoadingButton } from "@mui/lab";
+import { Box, Link, TextField, Typography } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import { Formik } from "formik";
+import React from "react";
+import { useLoginMutation } from "../../redux/api";
+import { setCredentials } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const LoginPages = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values: any) => {
     try {
-      const { data } = await login(values);
+      const { data } = (await login(values)) as any;
 
       const credentials = {
         name: data.user.name,
@@ -26,7 +26,7 @@ const LoginPages = () => {
 
       dispatch(setCredentials(credentials));
     } catch (error) {
-      toast.error('The email or password is incorrect!');
+      toast.error("The email or password is incorrect!");
     }
   };
 
@@ -35,24 +35,24 @@ const LoginPages = () => {
       <Typography
         variant="h4"
         component="h1"
-        sx={{ marginTop: '16px', color: 'green' }}
+        sx={{ marginTop: "16px", color: "green" }}
       >
         Login
       </Typography>
       <Formik
-        initialValues={{ email: '', password: '' }}
-        validate={values => {
-          const errors = {};
+        initialValues={{ email: "", password: "" }}
+        validate={(values) => {
+          const errors: any = {};
           if (!values.email) {
-            errors.email = 'Required';
+            errors.email = "Required";
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
-            errors.email = 'Invalid email address';
+            errors.email = "Invalid email address";
           }
           return errors;
         }}
-        onSubmit={values => {
+        onSubmit={(values) => {
           handleSubmit(values);
         }}
       >
@@ -92,14 +92,13 @@ const LoginPages = () => {
             />
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                marginTop: '16px',
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "16px",
               }}
             >
               <LoadingButton
                 variant="contained"
-                margin="normal"
                 type="submit"
                 color="success"
                 loading={isLoading}
@@ -112,10 +111,10 @@ const LoginPages = () => {
           </form>
         )}
       </Formik>
-      <Box sx={{ textAlign: 'center', marginTop: '24px', color: 'green' }}>
+      <Box sx={{ textAlign: "center", marginTop: "24px", color: "green" }}>
         <Typography variant="h6">Don't have an acount?</Typography>
 
-        <Link component={NavLink} to="/register" sx={{ color: 'green' }}>
+        <Link component={NavLink} to="/register" sx={{ color: "green" }}>
           Registration here
         </Link>
       </Box>

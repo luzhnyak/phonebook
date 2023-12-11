@@ -1,19 +1,19 @@
-import { lazy, useEffect } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { lazy, useEffect } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useGetCurrentUserQuery } from 'redux/api';
-import { getUser } from 'redux/selectors';
-import { setCredentials } from 'redux/authSlice';
+import { useGetCurrentUserQuery } from "./redux/api";
+import { getUser } from "./redux/selectors";
+import { setCredentials } from "./redux/authSlice";
 
-import { SharedLayout } from './SharedLayout';
-import { PrivateRoute } from './PrivateRoute';
-import { RestrictedRoute } from './RestrictedRoute';
+import { SharedLayout } from "./components/SharedLayout";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { RestrictedRoute } from "./components/RestrictedRoute";
 
-const ContactsPage = lazy(() => import('pages/ContactsPages/ContactsPages'));
-const LoginPages = lazy(() => import('pages/LoginPages/LoginPages'));
-const RegisterPages = lazy(() => import('pages/RegisterPages/RegisterPages'));
-const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const ContactsPage = lazy(() => import("./pages/ContactsPages/ContactsPages"));
+const LoginPages = lazy(() => import("./pages/LoginPages/LoginPages"));
+const RegisterPages = lazy(() => import("./pages/RegisterPages/RegisterPages"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 export const App = () => {
   const { token } = useSelector(getUser);

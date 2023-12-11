@@ -6,13 +6,13 @@ import {
   MenuItem,
   Tooltip,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@mui/material";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setCredentials } from 'redux/authSlice';
-import { useLogoutMutation } from 'redux/api';
-import { getUser } from 'redux/selectors';
+import { setCredentials } from "../../redux/authSlice";
+import { useLogoutMutation } from "../../redux/api";
+import { getUser } from "../../redux/selectors";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -21,7 +21,7 @@ const UserMenu = () => {
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
 
-  const handleOpenUserMenu = event => {
+  const handleOpenUserMenu = (event: any) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -31,7 +31,7 @@ const UserMenu = () => {
 
   const handleLogout = () => {
     setAnchorElUser(null);
-    logout();
+    logout(null);
     const credentials = {
       name: null,
       token: null,
@@ -49,17 +49,17 @@ const UserMenu = () => {
         </IconButton>
       </Tooltip>
       <Menu
-        sx={{ mt: '45px' }}
+        sx={{ mt: "45px" }}
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         keepMounted
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}

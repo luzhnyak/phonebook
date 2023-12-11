@@ -1,21 +1,21 @@
-import { LoadingButton } from '@mui/lab';
-import { Box, TextField, Typography } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import { Formik } from 'formik';
-import React from 'react';
-import { useAddUserMutation } from 'redux/api';
-import { setCredentials } from 'redux/authSlice';
-import { useDispatch } from 'react-redux';
-import toast from 'react-hot-toast';
+import { LoadingButton } from "@mui/lab";
+import { Box, TextField, Typography } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import { Formik } from "formik";
+import React from "react";
+import { useAddUserMutation } from "../../redux/api";
+import { setCredentials } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 const RegisterPages = () => {
   const [addUser, { isLoading }] = useAddUserMutation();
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values: any) => {
     try {
-      const { data } = await addUser(values);
+      const { data } = (await addUser(values)) as any;
 
       const credentials = {
         name: data.user.name,
@@ -25,7 +25,7 @@ const RegisterPages = () => {
 
       dispatch(setCredentials(credentials));
     } catch (error) {
-      toast.error('The email or password is incorrect!');
+      toast.error("The email or password is incorrect!");
     }
   };
 
@@ -34,24 +34,24 @@ const RegisterPages = () => {
       <Typography
         variant="h4"
         component="h1"
-        sx={{ marginTop: '16px', color: 'green' }}
+        sx={{ marginTop: "16px", color: "green" }}
       >
         Register
       </Typography>
       <Formik
-        initialValues={{ name: '', email: '', password: '' }}
-        validate={values => {
-          const errors = {};
+        initialValues={{ name: "", email: "", password: "" }}
+        validate={(values) => {
+          const errors: any = {};
           if (!values.email) {
-            errors.email = 'Required';
+            errors.email = "Required";
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
-            errors.email = 'Invalid email address';
+            errors.email = "Invalid email address";
           }
           return errors;
         }}
-        onSubmit={values => {
+        onSubmit={(values) => {
           handleSubmit(values);
         }}
       >
@@ -103,14 +103,13 @@ const RegisterPages = () => {
             />
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                marginTop: '16px',
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "16px",
               }}
             >
               <LoadingButton
                 variant="contained"
-                margin="normal"
                 type="submit"
                 color="success"
                 loading={isLoading}

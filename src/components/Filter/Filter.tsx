@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { getFilter } from 'redux/selectors';
-import { Box, TextField } from '@mui/material';
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter } from "../../redux/filterSlice";
+import { getFilter } from "../../redux/selectors";
+import { Box, TextField } from "@mui/material";
 
 export const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
 
-  const handleFilterChange = event => {
+  const handleFilterChange = (event: any) => {
     return dispatch(setFilter(event.target.value));
   };
 

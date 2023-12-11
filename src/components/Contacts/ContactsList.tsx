@@ -1,35 +1,36 @@
-import { useSelector } from 'react-redux';
-import { getFilter } from 'redux/selectors';
-import { Contact } from 'components/Contacts/Contact';
+import { useSelector } from "react-redux";
+import { getFilter } from "../../redux/selectors";
+import { Contact } from "./Contact";
 // import { Ul } from './ContactsList.styled';
-import { useGetContactsQuery } from 'redux/api';
+import { useGetContactsQuery } from "../../redux/api";
 
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 // import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import { Filter } from 'components/Filter/Filter';
-import { Loader } from 'components/Loader';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
-import Empty from './Empty';
+import List from "@mui/material/List";
+import { Filter } from "../Filter/Filter";
+import { Loader } from "../Loader";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import Empty from "./Empty";
+import { IContact } from "../../types";
 
-const getFilteredContacts = (contacts, filter) => {
-  return contacts?.filter(contact =>
+const getFilteredContacts = (contacts: any, filter: string) => {
+  return contacts?.filter((contact: any) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 };
 
 export const ContactsList = () => {
-  const { data: contacts, isLoading, error } = useGetContactsQuery();
+  const { data: contacts, isLoading, error } = useGetContactsQuery(null);
   const filter = useSelector(getFilter);
   const filteredContacts = getFilteredContacts(contacts, filter);
 
   // Виводимо помилку
-  useEffect(() => {
-    if (error) toast.error(error.data.message);
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) toast.error(error.data.message);
+  // }, [error]);
 
-  const Demo = styled('div')(({ theme }) => ({
+  const Demo = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
   }));
 
@@ -41,7 +42,7 @@ export const ContactsList = () => {
       {!isLoading && contacts && (
         <Demo>
           <List component="ul">
-            {filteredContacts?.map(contact => (
+            {filteredContacts?.map((contact: IContact) => (
               <Contact
                 id={contact.id}
                 key={contact.id}

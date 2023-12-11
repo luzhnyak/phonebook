@@ -1,10 +1,10 @@
-import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { ContactForm } from 'components/Contacts/ContactForm';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setOpenModal } from 'redux/modalSlice';
-import { getOpenModal } from 'redux/selectors';
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { ContactForm } from "../Contacts/ContactForm";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenModal } from "../../redux/modalSlice";
+import { getOpenModal } from "../../redux/selectors";
 
 const Modal = () => {
   const openModal = useSelector(getOpenModal);
@@ -22,10 +22,10 @@ const Modal = () => {
           aria-label="close"
           onClick={handleClose}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             right: 8,
             top: 8,
-            color: theme => theme.palette.grey[500],
+            color: (theme) => theme.palette.grey[500],
           }}
         >
           <CloseIcon />
