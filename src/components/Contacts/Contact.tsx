@@ -8,14 +8,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LoadingButton from "@mui/lab/LoadingButton";
 import PersonIcon from "@mui/icons-material/Person";
 import { Link, Paper } from "@mui/material";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneIcon from "@mui/icons-material/Phone";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 type Props = {
   id?: string;
   name: string;
-  number: string;
+  phone: string;
+  email?: string;
+  avatarURL?: string;
 };
 
-export const Contact: React.FC<Props> = ({ id, name, number }) => {
+export const Contact: React.FC<Props> = ({
+  id,
+  name,
+  phone,
+  email,
+  avatarURL,
+}) => {
   const [deleteContact, deleteInfo] = useDeleteContactMutation();
   const handleDelete = () => deleteContact(id);
 
@@ -45,20 +57,41 @@ export const Contact: React.FC<Props> = ({ id, name, number }) => {
       sx={{ borderBottom: "1px solid lightGreen" }}
     >
       <ListItemAvatar>
-        <Avatar sx={{ backgroundColor: getRandomHexColor() }}>
+        <Avatar sx={{ backgroundColor: getRandomHexColor() }} src={avatarURL}>
           <PersonIcon />
         </Avatar>
       </ListItemAvatar>
       <ListItemText
         primary={name}
         secondary={
-          <Link
-            href={"tel:" + number}
-            underline="hover"
-            sx={{ color: "green" }}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 0, sm: 2 }}
+            divider={<Divider orientation="vertical" flexItem />}
           >
-            {number}
-          </Link>
+            <Link
+              href={"tel:" + phone}
+              underline="hover"
+              sx={{ color: "green" }}
+            >
+              <Stack direction="row" spacing={1}>
+                <PhoneIcon fontSize="small" />
+                <span>{phone}</span>
+              </Stack>
+            </Link>
+            {email && (
+              <Link
+                href={"mailto:" + email}
+                underline="hover"
+                sx={{ color: "green" }}
+              >
+                <Stack direction="row" spacing={1}>
+                  <MailOutlineIcon fontSize="small" />
+                  <span>{email}</span>
+                </Stack>
+              </Link>
+            )}
+          </Stack>
         }
       />
     </ListItem>

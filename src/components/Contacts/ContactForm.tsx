@@ -21,7 +21,7 @@ export const ContactForm = () => {
   };
 
   const handleSubmit = (contact: IContact) => {
-    const { name, number } = contact;
+    const { name, phone, email } = contact;
 
     if (isNameHas(name)) {
       toast.error(`${name} is already in contacts.`);
@@ -29,7 +29,7 @@ export const ContactForm = () => {
     }
 
     try {
-      addContact({ name, number });
+      addContact({ name, phone, email });
       dispatch(setOpenModal(false));
     } catch (error) {
       toast.error(`Some error.`);
@@ -39,7 +39,7 @@ export const ContactForm = () => {
   return (
     <Box m={1}>
       <Formik
-        initialValues={{ name: "", number: "" }}
+        initialValues={{ name: "", phone: "", email: "" }}
         onSubmit={(values) => {
           handleSubmit(values);
         }}
@@ -71,15 +71,29 @@ export const ContactForm = () => {
               variant="outlined"
               fullWidth
               margin="normal"
-              label="Number"
+              label="Phone"
               type="text"
-              name="number"
+              name="phone"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               // pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
               required
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.number || ""}
+              value={values.phone || ""}
+            />
+            <TextField
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              label="Email"
+              type="text"
+              name="email"
+              title="Email"
+              // pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
+              required
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email || ""}
             />
             <Box
               sx={{

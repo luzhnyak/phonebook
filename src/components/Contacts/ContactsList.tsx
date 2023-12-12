@@ -44,10 +44,12 @@ export const ContactsList = () => {
           <List component="ul">
             {filteredContacts?.map((contact: IContact) => (
               <Contact
-                id={contact.id}
-                key={contact.id}
+                id={contact._id}
+                key={contact._id}
                 name={contact.name}
-                number={contact.number}
+                phone={contact.phone}
+                email={contact.email}
+                avatarURL={contact.avatarURL}
               />
             ))}
           </List>

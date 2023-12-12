@@ -4,7 +4,7 @@ import { RootState } from "./store";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://connections-api.herokuapp.com",
+    baseUrl: "http://localhost:4000",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
@@ -24,7 +24,7 @@ export const api = createApi({
     addUser: builder.mutation({
       query: (body) => {
         return {
-          url: "users/signup",
+          url: "users/register",
           method: "POST",
           body,
         };
@@ -51,13 +51,13 @@ export const api = createApi({
       invalidatesTags: ["User", "Contacts"],
     }),
     getContacts: builder.query({
-      query: () => `contacts`,
+      query: () => `api/contacts`,
       providesTags: ["Contacts"],
     }),
     addContact: builder.mutation({
       query: (body) => {
         return {
-          url: "contacts",
+          url: "api/contacts",
           method: "POST",
           body,
         };
@@ -67,7 +67,7 @@ export const api = createApi({
     deleteContact: builder.mutation({
       query: (id) => {
         return {
-          url: `contacts/${id}`,
+          url: `api/contacts/${id}`,
           method: "DELETE",
         };
       },
