@@ -16,7 +16,8 @@ import { getUser } from "../../redux/selectors";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { name } = useSelector(getUser);
+  const { name, avatarURL } = useSelector(getUser);
+  console.log("avatarURL", useSelector(getUser));
 
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
@@ -45,7 +46,7 @@ const UserMenu = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title={name}>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt={name} children={name[0]} />
+          <Avatar alt={name} src={avatarURL} />
         </IconButton>
       </Tooltip>
       <Menu

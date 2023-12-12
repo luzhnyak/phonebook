@@ -47,7 +47,7 @@ export const Contact: React.FC<Props> = ({
           onClick={handleDelete}
           title={`Delete ${name}`}
           loading={deleteInfo.isLoading}
-          loadingPosition="end"
+          // loadingPosition="end"
           variant="outlined"
           color="success"
         >
@@ -61,39 +61,33 @@ export const Contact: React.FC<Props> = ({
           <PersonIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText
-        primary={name}
-        secondary={
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 0, sm: 2 }}
-            divider={<Divider orientation="vertical" flexItem />}
-          >
+      <Stack>
+        <ListItemText primary={name}></ListItemText>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 0, sm: 2 }}
+          divider={<Divider orientation="vertical" flexItem />}
+        >
+          <Link href={"tel:" + phone} underline="hover" sx={{ color: "green" }}>
+            <Stack direction="row" spacing={1}>
+              <PhoneIcon fontSize="small" />
+              <span>{phone}</span>
+            </Stack>
+          </Link>
+          {email && (
             <Link
-              href={"tel:" + phone}
+              href={"mailto:" + email}
               underline="hover"
               sx={{ color: "green" }}
             >
               <Stack direction="row" spacing={1}>
-                <PhoneIcon fontSize="small" />
-                <span>{phone}</span>
+                <MailOutlineIcon fontSize="small" />
+                <span>{email}</span>
               </Stack>
             </Link>
-            {email && (
-              <Link
-                href={"mailto:" + email}
-                underline="hover"
-                sx={{ color: "green" }}
-              >
-                <Stack direction="row" spacing={1}>
-                  <MailOutlineIcon fontSize="small" />
-                  <span>{email}</span>
-                </Stack>
-              </Link>
-            )}
-          </Stack>
-        }
-      />
+          )}
+        </Stack>
+      </Stack>
     </ListItem>
   );
 };

@@ -46,6 +46,8 @@ export const App = () => {
       dispatch(
         setCredentials({
           name: user.data.name,
+          email: user.data?.email,
+          avatarURL: user.data?.avatarURL,
           isLoggedIn: true,
           isRefreshing: false,
         })

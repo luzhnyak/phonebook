@@ -1,25 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
+import { createSlice } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
 const authInitialState = {
   isLoggedIn: false,
   isRefreshing: false,
-  token: '',
-  name: '',
+  token: "",
+  name: "",
+  avatarURL: "",
 };
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whitelist: ['token'],
+  whitelist: ["token"],
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: authInitialState,
   reducers: {
     setCredentials(state, action) {
+      console.log(action);
       return (state = { ...state, ...action.payload });
     },
   },
