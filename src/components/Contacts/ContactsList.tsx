@@ -14,8 +14,8 @@ import toast from "react-hot-toast";
 import Empty from "./Empty";
 import { IContact } from "../../types";
 
-const getFilteredContacts = (contacts: any, filter: string) => {
-  return contacts?.filter((contact: any) =>
+const getFilteredContacts = (contacts: IContact[], filter: string) => {
+  return contacts?.filter((contact: IContact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 };
@@ -26,9 +26,11 @@ export const ContactsList = () => {
   const filteredContacts = getFilteredContacts(contacts, filter);
 
   // Виводимо помилку
-  // useEffect(() => {
-  //   if (error) toast.error(error.data.message);
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      toast.error("Error contacts");
+    }
+  }, [error]);
 
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -57,18 +59,4 @@ export const ContactsList = () => {
       )}
     </>
   );
-
-  // return (
-  //   <Ul>
-  // {filteredContacts?.map(contact => (
-  //   <li key={contact.id}>
-  //     <Contact
-  //       id={contact.id}
-  //       name={contact.name}
-  //       number={contact.number}
-  //     />
-  //   </li>
-  // ))}
-  //   </Ul>
-  // );
 };

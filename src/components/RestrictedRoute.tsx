@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUser } from "../redux/selectors";
-import { ReactNode } from "react";
+// import { ReactNode } from "react";
 
 /**
  * - If the route is restricted and the user is logged in, render a <Navigate> to redirectTo

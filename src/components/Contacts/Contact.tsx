@@ -7,7 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LoadingButton from "@mui/lab/LoadingButton";
 import PersonIcon from "@mui/icons-material/Person";
-import { Link, Paper } from "@mui/material";
+import { Link } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Stack from "@mui/material/Stack";
