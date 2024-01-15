@@ -4,7 +4,7 @@ import { RootState } from "./store";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://luzhnyak-aws.pp.ua",
+    baseUrl: "https://luzhnyak-aws.pp.ua:88",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
