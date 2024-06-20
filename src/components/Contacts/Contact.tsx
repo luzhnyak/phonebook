@@ -29,7 +29,11 @@ export const Contact: React.FC<Props> = ({
   avatarURL,
 }) => {
   const [deleteContact, deleteInfo] = useDeleteContactMutation();
-  const handleDelete = () => deleteContact(id);
+  const handleDelete = () => {
+    if (id) {
+      deleteContact(+id);
+    }
+  };
 
   function getRandomHexColor() {
     return `#${Math.floor(Math.random() * 16777215)
