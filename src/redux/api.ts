@@ -4,7 +4,7 @@ import { RootState } from "./store";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://luzhnyak-aws.pp.ua:88",
+    baseUrl: "http://luzhnyak-dev.pp.ua:84",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
@@ -65,7 +65,7 @@ export const api = createApi({
       invalidatesTags: ["Contacts"],
     }),
     deleteContact: builder.mutation({
-      query: (id) => {
+      query: (id: number) => {
         return {
           url: `api/contacts/${id}`,
           method: "DELETE",
